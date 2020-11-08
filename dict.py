@@ -13,10 +13,17 @@ def get_matches(word: str):
 
 def definition(word: str):
     """ returns the definition of word """
-    word = word.lower()
-    try:
-        meanings = data[word] 
-    except KeyError:
+    #word = word.lower()
+    if word in data:
+        meanings = data[word]
+        return "\n".join(meanings)
+    elif word.title() in data:
+        meanings = data[word.title()]
+        return "\n".join(meanings)
+    elif word.upper() in data:
+        meanings = data[word.upper()]
+        return "\n".join(meanings)
+    else:
         matches = get_matches(word)
         if len(matches) == 0:
             return f"The word {word} doesn't exist. Please double check it."
@@ -24,11 +31,11 @@ def definition(word: str):
             answer = input(f"Did you mean {matches[0]} instead? Yes (y) or No (n): ")
             if answer.lower() == "y":
                 return definition(matches[0])
+            elif answer.lower() == "n":
+                return f"The word {word} doesn't exist. Please double check it."
             else:
-                return "Bye"
-    else:
-        return "\n".join(meanings)
-
-while True:
+                return "I don't understand that"
+            
+while True:    
     userWord = input("Enter your word:\n")
     print(definition(userWord))
