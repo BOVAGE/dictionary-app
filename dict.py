@@ -37,5 +37,5 @@ def definition(word: str):
                 return "I don't understand that"
             
 while True:    
-    userWord = input("Enter your word:\n")
-    print(definition(userWord))
+    user_word = input("Enter your word:\n")
+    print(definition(user_word))
